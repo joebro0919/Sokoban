@@ -1,0 +1,29 @@
+pushin.tos: pushin.o model.o events.o raster.o effects.o music.o renderer.o psg.o sub.o
+	cc68x -g pushin.o model.o events.o raster.o effects.o music.o renderer.o psg.o sub.o -o pushin.tos
+
+pushin.o: pushin.c
+	cc68x -g -c pushin.c 
+
+sub.o: sub.s sub.h
+	gen -D -L2 sub.s
+
+effects.o: effects.c effects.h
+	cc68x -g -c effects.c
+
+music.o: music.c music.h
+	cc68x -g -c music.c
+
+psg.o: psg.c psg.h 
+	cc68x -g -c psg.c
+
+model.o: model.c model.h
+	cc68x -g -c model.c
+
+events.o: events.c events.h
+	cc68x -g -c events.c
+
+raster.o: raster.c raster.h sub.h
+	cc68x -g -c raster.c
+
+renderer.o: renderer.c renderer.h model.h raster.h
+	cc68x -g -c renderer.c
